@@ -1,0 +1,46 @@
+Table Customers {
+  customer_id int [pk]
+  first_name varchar(50)
+  last_name varchar(50)
+  email varchar(100) [unique]
+  phone varchar(20)
+  address varchar(200)
+  postcode varchar(10)
+  state varchar(50)
+  country varchar(50)
+  property_valuation int
+}
+
+Table Brands {
+  brand_id serial [pk]
+  brand_name varchar(100) [not null, unique]
+}
+
+Table Product_Lines {
+  product_line_id serial [pk]
+  product_line_name varchar(50) [not null, unique]
+}
+
+Table Products {
+  product_id int [pk]
+  brand_id int [not null, ref: > Brands.brand_id]
+  product_line_id int [not null, ref: > Product_Lines.product_line_id]
+  product_class varchar(50)
+  product_size varchar(20)
+  list_price decimal(10,2)
+  standard_cost decimal(10,2)
+}
+
+Table Order_Status {
+  status_id serial [pk]
+  status_name varchar(50) [not null, unique]
+}
+
+Table Transactions {
+  transaction_id int [pk]
+  customer_id int [not null, ref: > Customers.customer_id]
+  product_id int [not null, ref: > Products.product_id]
+  transaction_date timestamp [not null]
+  online_order boolean [default: false]
+  status_id int [not null, ref: > Order_Status.status_id]
+}
