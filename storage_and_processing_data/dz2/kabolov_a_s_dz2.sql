@@ -1,6 +1,6 @@
 select distinct brand from transaction t where t.standard_cost > 1500;
 
-select * from transaction t where to_date(t.transaction_date, 'DD.MM.YYYY') between '2017-04-01' and '2017-04-09';
+select * from transaction t where t.order_status = 'Approved' and to_date(t.transaction_date, 'DD.MM.YYYY') between '2017-04-01' and '2017-04-09'
 
 select * from customer c where (c.job_industry_category IN ('IT', 'Financial Services')) and c.job_title like 'Senior%';
 
